@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-BASE_URL=https://download.freebsd.org/snapshots/riscv/riscv64/ISO-IMAGES/14.0
-BASE_IMAGE=FreeBSD-14.0-CURRENT-riscv-riscv64-GENERICSD-20230420-f369f10dd812-262341.img
+BASE_URL=https://download.freebsd.org/snapshots/riscv/riscv64/ISO-IMAGES/15.0/
+BASE_IMAGE=FreeBSD-15.0-CURRENT-riscv-riscv64-GENERICSD-20241017-b88df1e893c4-273001.img #new version
 
 DTB_FILE=jh7110-visionfive-v2.dtb
 
@@ -62,9 +62,9 @@ mkdir -p /mnt/s /mnt/t
 
 
 # create empty boot image
-truncate -s 1G boot.img
+truncate -s 3G boot.img #modified to increase the size, necessary to store root.img.uzip
 mdconfig -a -t vnode -f boot.img -u 1
-newfs -L bootfs /dev/md1
+newfs -L bootfs /dev/md1 
 
 # mount root and boot
 mdconfig -a -t vnode -f root.img -u 0
